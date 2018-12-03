@@ -1,0 +1,30 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"/> 
+
+<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="game.js"></script>
+</head>
+<body onLoad="onLoad();" onKeyDown="onKeyDown(event);" onKeyUp="onKeyUp(event);" >
+<!-- <div id="title"> -->
+<!-- Naval Treasure -->
+<!-- </div> -->
+<div id="main">
+	<div id="game-container">
+		<div id="score-container">
+			<div id="score"></div>
+			<div id="hi-score-container">
+				<div id="score-label" class="label">Hi Score</div>
+				<div id="hi-score"></div>
+			</div>
+		</div>
+		<div id="health-bar-container">
+			<div id="health-bar"></div>
+		</div>
+		<canvas id="game-canvas" width="600" height="600"></canvas>
+	</div>
+</div>
+
+</body>
+</html>
