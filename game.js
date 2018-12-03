@@ -1,25 +1,27 @@
 var moveIncrement = 4;
-var opponentSpeed = 2.8;
-var opponentSpeedVariation = 1.0;
-var gameEndDelay = 2000;
+const opponentSpeed = 2.8;
+const opponentSpeedVariation = 1.0;
+const gameEndDelay = 2000;
 
-var playerNumberDuration = 20;
-var healthCreationProb = 0.001;
-var mathPillCreationProb = 0.0030;
-var mathPillLifespan = 12;
-var superspeedCreationProb = 0.0004;
-var superspeedLifespan = 8;
-var superspeedPillRadius = 8;
-var superspeedDuration = 6;
-var opponentCreationProb = 0.0018;
-var opponentLifespan = 10;
-var opponentLifespanVariation = 4;
-var teleporterDeactivationProb = 0.004;
-var teleporterActivationProb = 0.01;
-var opponentRadius = 14;
-var mainInterval = 20;
+const correctMathBonus = 200;
+const incorrectMathPenalty = 120;
+const playerNumberDuration = 20;
+const healthCreationProb = 0.001;
+const mathPillCreationProb = 0.0030;
+const mathPillLifespan = 12;
+const superspeedCreationProb = 0.0004;
+const superspeedLifespan = 8;
+const superspeedPillRadius = 12;
+const superspeedDuration = 6;
+const opponentCreationProb = 0.0018;
+const opponentLifespan = 10;
+const opponentLifespanVariation = 4;
+const teleporterDeactivationProb = 0.004;
+const teleporterActivationProb = 0.01;
+const opponentRadius = 14;
+const initMainInterval = 20;
 
-var sounds = {
+const sounds = {
 	attack : new Audio("chomp.mp3"),
 	scorePoints : new Audio("point_score.mp3"),
 	health : new Audio("health.mp3"),
@@ -29,7 +31,7 @@ var sounds = {
 	mathIncorrect : new Audio("incorrect.mp3"),
 };
 
-var pointPillTypes = {
+const pointPillTypes = {
 	20 : {
 		radius : 20,
 		radiusVariation : 8,
@@ -153,7 +155,7 @@ function mainLoop() {
 				x : 1.2 * (Math.random() - 0.5),
 				y : 1.2 * (Math.random() - 0.5),
 			},
-			radius : 12,
+			radius : superspeedPillRadius,
 			created : new Date(),
 		});
 	}
@@ -383,10 +385,10 @@ function mainLoop() {
 		if (distance(pill) < pill.radius + player.radius) {
 			stopSounds();
 			if (player.number % pill.number == 0) {
-				addPoints(200);
+				addPoints(correctMathBonus);
 				sounds.mathCorrect.play();
 			} else {
-				addPoints(-120);
+				addPoints(-incorrectMathPenalty);
 				sounds.mathIncorrect.play();
 			}
 			toRemove.push(i);
@@ -524,7 +526,7 @@ function init() {
 	superspeedTime = null;
 	gameEndTime = null;
 	moveIncrement = 4;
-	mainInterval = 20;
+	mainInterval = initMainInterval;
 	itNum = 0;
 	score = 0;
 	health = 100;
